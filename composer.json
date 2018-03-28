@@ -1,0 +1,15 @@
+{
+    "name": "forfire/social_login",
+    "description": "wx weibo qq login",
+    "authors": [
+        {
+            "name": "forfire",
+            "email": "forfire@foxmail.com"
+        }
+    ],
+    "autoload": {
+         "psr-4": {
+            "Social": "src/"
+         }
+    }
+}
