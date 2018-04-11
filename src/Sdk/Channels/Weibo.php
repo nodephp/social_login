@@ -64,10 +64,10 @@ class Weibo extends Base implements SocialInterface
             'n' => 0,
         );
         $userInfo = array(
-            'nickname' => $info['name'],
+            'openid' => $info['idstr'],
+            'nick' => $info['name'],
             'face' => preg_replace('/\.50\//', '.180/', $info['profile_image_url']),
             'sex' => $gender[$info['gender']],
-            'openid' => $info['idstr'],
         );
 
         return $userInfo;

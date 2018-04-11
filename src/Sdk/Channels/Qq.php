@@ -105,10 +105,10 @@ class Qq extends Base implements SocialInterface
             '女' => 2,
         );
         $userInfo = array(
+            'openid' => $this->openId,
             'nick' => $info['nickname'],
             'face' => empty($info['figureurl_qq_2']) ? $info['figureurl_qq_1'] : $info['figureurl_qq_2'],
             'sex' => isset($gender[$info['gender']]) ? $gender[$info['gender']] : 0,
-            'openid' => $this->openId,
         );
 
         return $userInfo;

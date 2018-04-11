@@ -29,8 +29,11 @@ class Base
     {
         if (!is_array($code)) {
             $this->getAccessToken($code);
+            $result = $this->getUserInfo();
+        } else {
+            $result = $this->getUserInfo($code);
         }
-        $result = $this->getUserInfo($code);
+
         return $result;
     }
 
@@ -55,8 +58,6 @@ class Base
 
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
-        curl_close($ch);
-
         if (empty($info['http_code']) || $info['http_code'] != 200) {
             throw new Exception('', self::HTTP_ERROR);
         }
@@ -79,6 +80,7 @@ class Base
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
         curl_close($ch);
+
         if (empty($info['http_code']) || $info['http_code'] != 200) {
             throw new Exception('', self::HTTP_ERROR);
         }

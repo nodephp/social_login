@@ -21,16 +21,16 @@ class Wx extends Base implements SocialInterface
             'code' => $code,
         );
         $token = array();
-        // $result = $this->httpGet($this->tokenUrl . '?' . http_build_query($params));
-        // if (!$result) {
-        //     throw new Exception('', parent::HTTP_ERROR);
-        // }
-        //  $token = json_decode($result, true);
-        $token = [
-            "access_token" => "8_DKoMdEFKRoUDI-SbwZe-3xiuRjfWkoCdpaLjg7KIAMtfxwrv9kE5V28tdG9QxVqxlx552bQhb1QyFFE7l81e1zSDZUUDs9o2bh1t3_Ya41Q",
-            "openid" => "oSUR-05z-c_BWc3TewZ-RRLqA484",
-            "unionid" => "oaJJlwqJEqETGgm9Zve7bUktr8Yg",
-        ];
+        $result = $this->httpGet($this->tokenUrl . '?' . http_build_query($params));
+        if (!$result) {
+            throw new Exception('', parent::HTTP_ERROR);
+        }
+        $token = json_decode($result, true);
+        // $token = [
+        //     "access_token" => "8_DKoMdEFKRoUDI-SbwZe-3xiuRjfWkoCdpaLjg7KIAMtfxwrv9kE5V28tdG9QxVqxlx552bQhb1QyFFE7l81e1zSDZUUDs9o2bh1t3_Ya41Q",
+        //     "openid" => "oSUR-05z-c_BWc3TewZ-RRLqA484",
+        //     "unionid" => "oaJJlwqJEqETGgm9Zve7bUktr8Yg",
+        // ];
         if (!isset($token['access_token']) || empty($token['access_token'])) {
             if (isset($token['errmsg'])) {
                 throw new Exception($token['errmsg'], $token['errcode']);
@@ -52,11 +52,13 @@ class Wx extends Base implements SocialInterface
         if (!$this->token) {
             throw new Exception('', parent::TOKEN_ERROR);
         }
+
         $userInfoUrl = $this->infoUrl . '?'
         . 'access_token=' . $this->token['access_token']
         . '&openid=' . $this->token['openid'];
 
         $result = $this->httpPost($userInfoUrl, []);
+
         if (!$result) {
             throw new Exception('', parent::HTTP_ERROR);
         }
